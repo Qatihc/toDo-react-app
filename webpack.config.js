@@ -11,8 +11,9 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     hot: true,
+    port: 3000,
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {

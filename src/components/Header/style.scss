@@ -1,0 +1,14 @@
+.header-wrap{
+  background-color: hsl(50,80%,75%, 1);
+  height: 5vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-left-panel{
+  order: 1;
+}
+
+.header-right-panel{
+  order: 2;
+}
