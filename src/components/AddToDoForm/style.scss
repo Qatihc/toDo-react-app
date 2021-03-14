@@ -1,0 +1,33 @@
+.form-add-to-do{
+  
+}
+
+.form-add-to-do > input{
+  outline: none;
+  padding: 1em;
+  line-height: 1.4;
+  border-radius: 5px;
+  border: none;
+  background-color: #f1d8c4;
+  box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1em;
+  padding: 0.6em 1.5em;
+  -webkit-transition: .20s ease-out;
+  -moz-transition: .20s ease-out;
+  -o-transition: .20s ease-out;
+  transition: .20s ease-out;
+}
+
+.form-add-to-do > input:hover{
+  box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.form-add-to-do > input:focus{
+  color: #4b515d;
+  border: 1px solid #B8B6B6;
+  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-add-to-do > button{
+  padding: 3em;
+}

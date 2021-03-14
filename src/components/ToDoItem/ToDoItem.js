@@ -6,7 +6,7 @@ function ToDoItem(props){
   let isDoneClass = (toDo.done) ? 'to-do-item-done' : ''
   return(
     <li className={`to-do-item ${isDoneClass}`} onClick={() => toggleDone(toDo.id)}>
-      {toDo.name}  :  {toDo.desc}
+      {toDo.name}
     </li> 
   )
 }

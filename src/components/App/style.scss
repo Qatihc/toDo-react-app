@@ -1,6 +1,8 @@
-$body-color: blue;
+$body-color: #1e212d;
+$background-color: #faf3e0;
 
 html, body, #root, .main-wrap {
   height: 100%;
   color: $body-color;
+  background-color: $background-color;
 }

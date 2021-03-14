@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import ToDo from '../../models/ToDo';
 import generateId from '../../helpers/generateId';
 
+import './style.scss'
+
 class AddToDoForm extends Component{
   constructor(props){
     super(props)
 
     this.state = {
       name: '',
-      desc: '',
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,12 +18,11 @@ class AddToDoForm extends Component{
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name="name" value={this.props.nameValue} 
-          onChange={(e) => this.handleChange('name', e.target.value)}>
-        </input>
-        <input type="text" name="desc" value={this.props.descValue}
-          onChange={(e) => this.handleChange('desc', e.target.value)}>
+      <form onSubmit={this.handleSubmit} className="form-add-to-do" >
+        <input type="text" name="name" value={this.state.name} 
+          onChange={(e) => this.handleChange('name', e.target.value)}
+          autoComplete="off"
+        >
         </input>
         <button type="submit" value="Crear"></button>
       </form>
@@ -35,13 +35,14 @@ class AddToDoForm extends Component{
 
   handleSubmit(event){
     event.preventDefault();
-    const {saveToDoToCurrentCategory} = this.props,
-      {name, desc} = this.state,
+    const {saveToDo} = this.props,
+      {name} = this.state,
       id = generateId();
 
-    const toDo = new ToDo({name, desc, id})
-    saveToDoToCurrentCategory(toDo);
-
+    this.handleChange('name', '')
+    if(!name || name.match(/^\s*$/)) return;
+    const toDo = new ToDo({name, id})
+    saveToDo(toDo);
   }
 
 }

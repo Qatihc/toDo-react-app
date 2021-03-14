@@ -1,4 +1,4 @@
-let currentId = 2;
+let currentId = 5;
 
 const generateId = function(){
   currentId++
