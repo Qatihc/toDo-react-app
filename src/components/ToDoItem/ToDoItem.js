@@ -5,7 +5,7 @@ function ToDoItem(props){
   let {toDo, toggleDone} = props;
   let isDoneClass = (toDo.done) ? 'to-do-item-done' : ''
   return(
-    <li className={`to-do-item ${isDoneClass}`} onClick={() => toggleDone(toDo.id)}>
+    <li className={'to-do-item' + ' ' + isDoneClass} onClick={() => toggleDone(toDo.id)}>
       {toDo.name}
     </li> 
   )

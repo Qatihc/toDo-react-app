@@ -7,20 +7,15 @@ import {ToDoCategory} from '../ToDoCategory';
 import './style.scss'
 /* BORRAR TEST CATEOGRY! */
 
+import ToDo from '../../models/ToDo'
+
 const testCategory = {
   name: 'categoria de prueba',
   id: 1,
   toDos: [
-    {
-      id: 4,
-      name: 'primerToDo',
-      done: false,
-    },
-    {
-      id: 5,
-      name: 'seg',
-      done: true,
-    }
+    new ToDo({name: 'primero', id: 1}),
+    new ToDo({name: 'seg', id: 2}),
+    new ToDo({name: 'quin', id: 3}),
   ]
 }
 
@@ -28,16 +23,8 @@ const pepCategory = {
   name: 'segundo test',
   id: 2,
   toDos: [
-    {
-      id: 6,
-      name: 'segrToDo',
-      done: false,
-    },
-    {
-      id: 7,
-      name: 'tercer',
-      done: true,
-    }
+    new ToDo({name: 'terc', id: 6}),
+    new ToDo({name: 'cu', id: 7}),
   ]
 }
 
@@ -86,7 +73,7 @@ class ToDoApp extends Component{
     )
   }
 
-  updateCurrentCategory(updatedCategory){
+  modifyCurrentCategory(updatedCategory){
     const {name, toDos} = updatedCategory,
       {categories, currentCategory} = this.state;
 
@@ -111,7 +98,7 @@ class ToDoApp extends Component{
     let updatedToDos = toDos.map(toDo => 
       (toDo.id === id) ? {...toDo, done: !toDo.done} : toDo
     )
-    this.updateCurrentCategory({toDos: updatedToDos})
+    this.modifyCurrentCategory({toDos: updatedToDos})
 
   }
 
@@ -121,7 +108,7 @@ class ToDoApp extends Component{
     let {categories, currentCategory} = this.state;
     let updatedToDos = categories[currentCategory].toDos.concat([toDo]);
     
-    this.updateCurrentCategory({toDos: updatedToDos})
+    this.modifyCurrentCategory({toDos: updatedToDos})
   }
 
   changeCategory(to){

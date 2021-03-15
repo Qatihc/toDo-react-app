@@ -1,19 +1,20 @@
-/* import React from 'react';
+import React from 'react';
 
 let Form = function(props) {
-  let {inputList} = props;
+  const {inputList, formName, handleChange, handleSubmit} = props;
   return(
-    <div>
-      <form>
+      <form className={'form-' + formName} onSubmit={handleSubmit}>
         {inputList.map(input =>
           <input 
-            type={input.type || 'text'}
-            
+            key={input}
+            type='text'
+            autoComplete='off'
+            onChange={e =>  handleChange('name', e.target.value)}
           />
         )}
+        <input type='submit' className={'submit-btn' + ' ' + formName + '-submit-btn'}></input>
       </form>
-    </div>
   )
 }
 
-export default Form; */
+export default Form;
