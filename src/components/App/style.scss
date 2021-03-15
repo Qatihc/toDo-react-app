@@ -1,8 +1,10 @@
-$body-color: #1e212d;
-$background-color: #faf3e0;
+$body-color: #312f2f;
+$background-color: #382933;
 
 html, body, #root, .main-wrap {
+  
   height: 100%;
+  max-width: 100vw;
   color: $body-color;
   background-color: $background-color;
 }

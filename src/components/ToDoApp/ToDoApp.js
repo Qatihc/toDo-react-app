@@ -1,21 +1,23 @@
 import React, {Component} from 'react';
+import {HeaderContainer} from '../Header';
+import {CategoryList} from '../CategoryList'
 import {ToDoCategory} from '../ToDoCategory';
+
 
 import './style.scss'
 /* BORRAR TEST CATEOGRY! */
 
-
-
 const testCategory = {
   name: 'categoria de prueba',
+  id: 1,
   toDos: [
     {
-      id: 1,
+      id: 4,
       name: 'primerToDo',
       done: false,
     },
     {
-      id: 2,
+      id: 5,
       name: 'seg',
       done: true,
     }
@@ -24,14 +26,15 @@ const testCategory = {
 
 const pepCategory = {
   name: 'segundo test',
+  id: 2,
   toDos: [
     {
-      id: 3,
+      id: 6,
       name: 'segrToDo',
       done: false,
     },
     {
-      id: 4,
+      id: 7,
       name: 'tercer',
       done: true,
     }
@@ -40,6 +43,7 @@ const pepCategory = {
 
 const tercera = {
   name: 'tercera cat',
+  id: 3,
   toDos: []
 }
 
@@ -67,13 +71,16 @@ class ToDoApp extends Component{
     let {categories, currentCategory} = this.state
 
     return(
-      <div className="category-wrap">
+      <div className="main-wrap">
+        <HeaderContainer />
+        <CategoryList 
+          categories={categories}
+          changeCategory={this.changeCategory}
+        />
         <ToDoCategory
           category={categories[currentCategory]} 
           toggleDone={this.toggleDone} 
           saveToDo={this.saveToDo}
-          nextCategory={this.nextCategory}
-          previousCategory={this.previousCategory}
         />
       </div>
     )

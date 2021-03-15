@@ -8,12 +8,10 @@ import {ToDoApp} from '../ToDoApp';
 class App extends Component {
   render() {
     return(
-      <div className="main-wrap">
-        <HeaderContainer />
         <ToDoApp/>
-      </div>
     )
   }
 }
 
 export default App;
+
