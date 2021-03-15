@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import ToDo from '../../models/ToDo';
 import generateId from '../../helpers/generateId';
 
+import Form from './Form';
+
 import './style.scss'
 
 class AddToDoForm extends Component{
@@ -18,14 +20,19 @@ class AddToDoForm extends Component{
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit} className="form-add-to-do" >
-        <input type="text" name="name" value={this.state.name} 
+      <Form inputList={['name']}
+        formName='add-to-do'
+        handleSubmit={this.handleSubmit}
+        handleChange={this.handleChange}
+
+      >
+{/*         <input type="text" name="name" value={this.state.name} 
           onChange={(e) => this.handleChange('name', e.target.value)}
           autoComplete="off"
         >
         </input>
-        <button type="submit" value="Crear"></button>
-      </form>
+        <button type="submit" value="Crear"></button> */}
+      </Form>
     )
   }
 
