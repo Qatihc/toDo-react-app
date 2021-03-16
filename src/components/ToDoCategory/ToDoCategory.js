@@ -1,11 +1,34 @@
 import React from 'react';
+
 import {ToDoList} from '../ToDoList';
-import {AddToDoForm} from '../AddToDoForm';
+import {AddToDoForm} from '../Form';
+import ToDo from '../../models/ToDo';
+import generateId from '../../helpers/generateId'
 
 import './style.scss'
 
 function ToDoCategory(props){
-  let {category, toggleDone, saveToDo, nextCategory, previousCategory} = props;
+  const {category, modifyCurrentCategory} = props;
+
+  function toggleDone(id){
+    const toDos = category.toDos;
+    const updatedToDos = toDos.map(toDo => 
+      (toDo.id === id) ? {...toDo, done: !toDo.done} : toDo
+    )
+
+    modifyCurrentCategory({toDos: updatedToDos})
+  }
+
+  function makeToDo(toDo){
+    const id = generateId();
+    return new ToDo({...toDo, id})
+  }
+
+  function renderNewToDo(toDo){
+    /* agregar validacion... */
+    let updatedToDos = category.toDos.concat([toDo]);
+    modifyCurrentCategory({toDos: updatedToDos});
+  }
 
   return(
     <div className="category-wrap">
@@ -18,7 +41,8 @@ function ToDoCategory(props){
           toggleDone={toggleDone} 
         />
         <AddToDoForm 
-          saveToDo={saveToDo}
+          makeToDo={makeToDo}
+          renderNewToDo={renderNewToDo}
         />
       </div>
     </div>

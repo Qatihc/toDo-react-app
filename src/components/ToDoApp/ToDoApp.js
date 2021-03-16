@@ -3,74 +3,61 @@ import {HeaderContainer} from '../Header';
 import {CategoryList} from '../CategoryList'
 import {ToDoCategory} from '../ToDoCategory';
 
+import {testCategory, pepCategory, tercera} from '../../testData'
 
 import './style.scss'
 /* BORRAR TEST CATEOGRY! */
-
-import ToDo from '../../models/ToDo'
-
-const testCategory = {
-  name: 'categoria de prueba',
-  id: 1,
-  toDos: [
-    new ToDo({name: 'primero', id: 1}),
-    new ToDo({name: 'seg', id: 2}),
-    new ToDo({name: 'quin', id: 3}),
-  ]
-}
-
-const pepCategory = {
-  name: 'segundo test',
-  id: 2,
-  toDos: [
-    new ToDo({name: 'terc', id: 6}),
-    new ToDo({name: 'cu', id: 7}),
-  ]
-}
-
-const tercera = {
-  name: 'tercera cat',
-  id: 3,
-  toDos: []
-}
-
 
 class ToDoApp extends Component{
   constructor(props){
     super(props)
     this.state = {
       currentCategory: 0,
-      categories: [
-        testCategory,
-        pepCategory,
-        tercera,
-      ],
+      categories: [],
     }
 
-    this.toggleDone = this.toggleDone.bind(this);
-    this.saveToDo = this.saveToDo.bind(this);
-    this.changeCategory = this.changeCategory.bind(this);
-    this.nextCategory = this.nextCategory.bind(this);
+    this.modifyCurrentCategory = this.modifyCurrentCategory.bind(this);
     this.previousCategory = this.previousCategory.bind(this);
+    this.changeToCategory = this.changeToCategory.bind(this);
+    this.addCategories = this.addCategories.bind(this);
+    this.nextCategory = this.nextCategory.bind(this);
+
   }
 
   render(){
     let {categories, currentCategory} = this.state
-
+    if(!categories.length) return <div></div>;
     return(
       <div className="main-wrap">
         <HeaderContainer />
         <CategoryList 
           categories={categories}
-          changeCategory={this.changeCategory}
+          changeToCategory={this.changeToCategory}
+          addCategories={this.addCategories}
         />
         <ToDoCategory
           category={categories[currentCategory]} 
-          toggleDone={this.toggleDone} 
-          saveToDo={this.saveToDo}
+          modifyCurrentCategory={this.modifyCurrentCategory}
         />
       </div>
     )
+  }
+
+  componentDidMount(){
+    let categories = this.fetchCategories();
+    this.addCategories(categories)
+  }
+
+  fetchCategories(){
+    /* MOCK FETCH */
+    return([testCategory, pepCategory, tercera])
+  }
+
+  addCategories(categoriesToAdd){
+    if(categoriesToAdd)
+    this.setState({
+      categories: [...this.state.categories, ...categoriesToAdd],
+    });
   }
 
   modifyCurrentCategory(updatedCategory){
@@ -90,43 +77,22 @@ class ToDoApp extends Component{
     );
   }
 
-  toggleDone(id){
-
-    let {categories, currentCategory} = this.state
-    let toDos = categories[currentCategory].toDos;
-
-    let updatedToDos = toDos.map(toDo => 
-      (toDo.id === id) ? {...toDo, done: !toDo.done} : toDo
-    )
-    this.modifyCurrentCategory({toDos: updatedToDos})
-
-  }
-
-  saveToDo(toDo){
-    /* agregar validacion... */
-    
-    let {categories, currentCategory} = this.state;
-    let updatedToDos = categories[currentCategory].toDos.concat([toDo]);
-    
-    this.modifyCurrentCategory({toDos: updatedToDos})
-  }
-
-  changeCategory(to){
-    this.setState({currentCategory: to});
+  changeToCategory(n){
+    this.setState({currentCategory: n});
   }
 
   nextCategory(){
     const {currentCategory} = this.state;
     const nextCategory = 
       (currentCategory + 1 == this.state.categories.length) ? 0 : currentCategory + 1;
-    this.changeCategory(nextCategory);
+    this.changeToCategory(nextCategory);
   }
 
   previousCategory(){
     const {currentCategory} = this.state;
     const previousCategory =
       (currentCategory == 0) ? this.state.categories.length - 1 : currentCategory - 1;
-    this.changeCategory(previousCategory)
+    this.changeToCategory(previousCategory)
   }
 
 }

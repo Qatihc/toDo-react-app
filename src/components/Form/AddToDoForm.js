@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import ToDo from '../../models/ToDo';
-import generateId from '../../helpers/generateId';
-
 import Form from './Form';
 
 import './style.scss'
@@ -20,18 +17,12 @@ class AddToDoForm extends Component{
 
   render(){
     return(
-      <Form inputList={['name']}
+      <Form inputList={[{name: 'name', value: this.state.name}, ]}
         formName='add-to-do'
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
 
       >
-{/*         <input type="text" name="name" value={this.state.name} 
-          onChange={(e) => this.handleChange('name', e.target.value)}
-          autoComplete="off"
-        >
-        </input>
-        <button type="submit" value="Crear"></button> */}
       </Form>
     )
   }
@@ -40,16 +31,16 @@ class AddToDoForm extends Component{
     this.setState({[propName]: value})
   }
 
-  handleSubmit(event){
-    event.preventDefault();
-    const {saveToDo} = this.props,
-      {name} = this.state,
-      id = generateId();
+  handleSubmit(e){
+    e.preventDefault();
+    const {makeToDo, renderNewToDo} = this.props;
+    const {name} = this.state;
 
     this.handleChange('name', '')
-    if(!name || name.match(/^\s*$/)) return;
-    const toDo = new ToDo({name, id})
-    saveToDo(toDo);
+    if(name.match(/^\s*$/)) return;
+    
+    const toDo = makeToDo({name})
+    renderNewToDo(toDo);
   }
 
 }
